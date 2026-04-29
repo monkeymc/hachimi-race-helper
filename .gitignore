@@ -1,0 +1,4 @@
+*.log
+tmp/
+.DS_Store
+text_data_dict.json

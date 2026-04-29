@@ -1,0 +1,9 @@
+[submodule "Assets"]
+	path = Assets
+	url = https://github.com/UmamusumeResponseAnalyzer/Assets
+[submodule "hachimi-sd"]
+	path = hachimi-sd
+	url = https://github.com/UmaTL/hachimi-sd
+[submodule "hachimi-tl-en"]
+	path = hachimi-tl-en
+	url = https://github.com/UmaTL/hachimi-tl-en
