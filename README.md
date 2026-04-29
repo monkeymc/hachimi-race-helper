@@ -1,47 +1,47 @@
 # Hachimi Race Helper (ウマ娘 Skill Visualizer)
 
-โปรเจกต์นี้จัดทำขึ้นเพื่อศึกษา **Vibe coding** และช่วยจำแนก Skill ภายในเกม **Uma Musume Pretty Derby (ウマ娘)** สำหรับผู้เล่นที่อ่านภาษาญี่ปุ่นไม่ออก โดยการเพิ่ม Prefix บอกระยะการทำงานของสกิล และการไฮไลต์สีข้อความเพื่อให้แยกแยะความสำคัญของสกิลแต่ละประเภทได้ง่ายขึ้น
+This project was created to study **Vibe coding** and help classify skills within **Uma Musume Pretty Derby (ウマ娘)** for players who cannot read Japanese. It enhances the game experience by adding English prefixes that indicate skill activation timing and applying color highlights to differentiate skill priorities.
 
-## 📸 รูปภาพตัวอย่าง (Demo)
+## 📸 Demo Screenshots
 
 ![Demo 1](demo_1.png)
 ![Demo 2](demo_2.png)
 
-## 🏷️ Prefix (ช่วงเวลาการทำงานของสกิล)
+## 🏷️ Prefixes (Skill Activation Timing)
 
-เพื่อช่วยให้เข้าใจว่าสกิลจะทำงานในช่วงใดของการแข่ง จะมีการใส่ Prefix ภาษาอังกฤษไว้ข้างหน้าชื่อสกิล ดังนี้:
+To help you understand when a skill will activate during a race, English prefixes are added before the Japanese skill names:
 
-- **`[E]` (Early Phase):** สกิลที่ทำงานในช่วงต้นเกม (Phase 0)
-- **`[M]` (Middle Phase):** สกิลที่ทำงานในช่วงกลางเกม (Phase 1, ระยะวิ่งเกิน 50%, หรือช่วงครึ่งหลัง)
-- **`[L]` (Late / Last Spurt):** สกิลที่ทำงานในช่วงท้ายเกมหรือช่วงเร่งความเร็ว (Phase 2 หรือ 3 ขึ้นไป, หรือ Final Corner)
+- **`[E]` (Early Phase):** Skills that activate during the start of the race (Phase 0).
+- **`[M]` (Middle Phase):** Skills that activate during the middle of the race (Phase 1, distance traveled >= 50%, or the latter half of the track).
+- **`[L]` (Late / Last Spurt):** Skills that activate during the final stages or when accelerating towards the goal (Phase 2 or 3+, or Final Corner).
 
-## 🎨 การจำแนกสีของสกิล (Colors)
+## 🎨 Skill Color Classification (Colors)
 
-เพื่อช่วยแยกความสำคัญของสกิลสำหรับม้าแข่งแต่ละตัว จะแบ่งสีออกเป็น 2 ระดับ:
+To help prioritize skills for each racehorse, skills are divided into 2 priority levels using color codes:
 
-- **สกิลสำคัญมาก (High Priority) - สีชมพู/แดง (`#ff0066`):** ใช้สำหรับสกิลหลักที่จำเป็นต้องมี
-- **สกิลทั่วไป (Normal Priority) - สีน้ำเงิน (`#0055ff`):** ใช้สำหรับสกิลรองหรือสกิลทั่วไปที่ต้องการใช้งาน
+- **High Priority - Pink/Red (`#ff0066`):** Essential skills that are highly recommended for your build.
+- **Normal Priority - Blue (`#0055ff`):** Secondary or standard skills that you plan to use.
 
-### ⚙️ วิธีการกำหนดสี
-สามารถแก้ไขรายการและจัดกลุ่มสกิลได้ที่ไฟล์ `skill.txt`:
-- หากต้องการสกิล **สีน้ำเงิน (Normal Priority)** ให้พิมพ์ชื่อสกิลปกติ เช่น `右回り`
-- หากต้องการสกิล **สีชมพู/แดง (High Priority)** ให้ใส่เครื่องหมายตกใจ `!` นำหน้า เช่น `!しゃかりき`
+### ⚙️ How to Define Colors
+You can manage your custom list and categorize skills in the `skill.txt` file:
+- To set a skill as **Blue (Normal Priority)**, simply type the skill name, e.g., `右回り`
+- To set a skill as **Pink/Red (High Priority)**, add an exclamation mark `!` in front of the name, e.g., `!しゃかりき`
 
-## 🛠️ การติดตั้ง (Installation)
+## 🛠️ Installation
 
-### สิ่งที่จำเป็น (Dependencies):
-เพื่อให้สคริปต์ประมวลผลได้ เครื่องของคุณจำเป็นต้องติดตั้ง:
-1. **`sqlite3`**: ใช้ในการสกัด (Extract) ข้อมูลสกิลจากฐานข้อมูล `master.mdb`
-2. **`jq`**: ใช้สำหรับจัดการข้อมูลรูปแบบ JSON
+### Dependencies:
+To run the processing script, ensure that you have the following installed on your system:
+1. **`sqlite3`**: Required to extract skill information from the game's `master.mdb` database.
+2. **`jq`**: Required to parse and modify the JSON data structure.
 
-### การตรวจสอบข้อผิดพลาด (`missing_skills.log`)
-หลังจากการประมวลผล หากมีรายชื่อสกิลใน `skill.txt` ที่พิมพ์ผิด หรือไม่พบข้อมูลตรงกับในเกม ระบบจะแสดงรายการเหล่านั้นไว้ใน `missing_skills.log`
+### Error Checking (`missing_skills.log`)
+After building the dictionary, if any skill listed in `skill.txt` contains a typo or is not found in the game's database, it will be logged into `missing_skills.log` for your review.
 
-## 🚀 วิธีการนำไปใช้ (How to use)
+## 🚀 How to Use
 
-1. รันสคริปต์ประมวลผลใน Terminal ด้วยคำสั่ง:
+1. Run the processing script in your Terminal:
    ```bash
    ./build_dict.sh
    ```
-2. ระบบจะสร้างไฟล์ `text_data_dict.json` ขึ้นมา
-3. ให้นำไฟล์ `text_data_dict.json` ไปใส่แทนที่ (Replace) ในโฟลเดอร์ `..\hachimi\localized_data\` ของโปรแกรมที่คุณใช้งาน
+2. The script will generate a `text_data_dict.json` file.
+3. Take the generated `text_data_dict.json` file and replace the original one located in the path: `..\hachimi\localized_data\` within your client folder.
