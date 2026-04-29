@@ -41,18 +41,18 @@ NORMAL_PRIORITY=$(grep -v "^!" "$RUNNER_LIST" | grep -vE "^#|^$" | sed -E 's/(.*
 
 # 5. Process Category 47 (Skills - Direct ID)
 echo "📦 Building category 47 with Smart Colors..."
-JSON_47=$(cat "$SKILL_JSON" | jq -r --arg high "$HIGH_PRIORITY" --arg normal "$NORMAL_PRIORITY" '
+cat "$SKILL_JSON" | jq -r --arg high "$HIGH_PRIORITY" --arg normal "$NORMAL_PRIORITY" '
     [ .[] | 
       if ($high != "" and (.Name | test($high))) then
         { (.Id | tostring): ("<color=#ff0066>" + .Name + "</color>") }
       elif ($normal != "" and (.Name | test($normal))) then
         { (.Id | tostring): ("<color=#0055ff>" + .Name + "</color>") }
       else empty end
-    ] | add')
+    ] | add' > "$TEMP_DIR/47.json"
 
 # 6. Process Category 147 (Factors - Cleaned & Smart Colors)
 echo "📦 Building category 147 with Smart Colors..."
-JSON_147=$(cat "$FACTOR_JSON" | jq -r --arg high "$HIGH_PRIORITY" --arg normal "$NORMAL_PRIORITY" '
+cat "$FACTOR_JSON" | jq -r --arg high "$HIGH_PRIORITY" --arg normal "$NORMAL_PRIORITY" '
     to_entries | 
     map(
       . as $item | ($item.value | gsub("[★☆]"; "")) as $n |
@@ -61,18 +61,18 @@ JSON_147=$(cat "$FACTOR_JSON" | jq -r --arg high "$HIGH_PRIORITY" --arg normal "
       elif ($normal != "" and ($n | test($normal))) then
         { ($item.key): ("<color=#0055ff>" + $n + "</color>") }
       else empty end
-    ) | add')
+    ) | add' > "$TEMP_DIR/147.json"
 
 # 7. Process Category 48 (SD Data)
 echo "📦 Syncing category 48 from SD file..."
-JSON_48=$(jq -c '.["48"]' "$SD_FILE")
+jq -c '.["48"]' "$SD_FILE" > "$TEMP_DIR/48.json"
 
 # 8. Final Assembly (Replace Mode)
 echo "🛠️ Final Assembly: Replacing categories 47, 48, 147..."
-jq --argjson d47 "$JSON_47" \
-   --argjson d48 "$JSON_48" \
-   --argjson d147 "$JSON_147" \
-   '.["47"] = $d47 | .["48"] = $d48 | .["147"] = $d147' \
+jq --slurpfile d47 "$TEMP_DIR/47.json" \
+   --slurpfile d48 "$TEMP_DIR/48.json" \
+   --slurpfile d147 "$TEMP_DIR/147.json" \
+   '.["47"] = ($d47[0] // {}) | .["48"] = ($d48[0] // {}) | .["147"] = ($d147[0] // {})' \
    "$MASTER_FILE" > "$OUTPUT_FILE"
 
 # 9. Cleanup
