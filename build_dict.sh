@@ -2,7 +2,7 @@
 
 # 1. Configuration
 MASTER_FILE="hachimi-tl-en/localized_data/text_data_dict.json"
-RUNNER_LIST="skill.txt"
+SKILL_LIST="skill.txt"
 MASTER_MDB="master.mdb"
 SD_FILE="hachimi-sd/localized_data/text_data_dict.json"
 OUTPUT_FILE="text_data_dict.json"
@@ -13,7 +13,7 @@ if ! command -v sqlite3 &> /dev/null; then
     exit 1
 fi
 
-if [[ ! -f "$MASTER_FILE" || ! -f "$RUNNER_LIST" || ! -f "$SD_FILE" || ! -f "$MASTER_MDB" ]]; then
+if [[ ! -f "$MASTER_FILE" || ! -f "$SKILL_LIST" || ! -f "$SD_FILE" || ! -f "$MASTER_MDB" ]]; then
     echo "❌ Error: Missing required files."
     exit 1
 fi
@@ -31,14 +31,14 @@ sqlite3 -json "$MASTER_MDB" 'SELECT s.id AS "index", n.text AS Name, s.precondit
 
 # 4. Smart Regex Generation (แยก 2 กลุ่ม)
 echo "🔍 Extracting priorities from skill.txt..."
-CLEAN_RUNNER="$TEMP_DIR/clean_runner.txt"
-tr -d '\r' < "$RUNNER_LIST" > "$CLEAN_RUNNER"
+CLEAN_SKILL="$TEMP_DIR/clean_skill.txt"
+tr -d '\r' < "$SKILL_LIST" > "$CLEAN_SKILL"
 
 # กลุ่มที่ 1: สำคัญมาก (มี ! นำหน้า) -> แปลง ○◎ เป็น [○◎]
-HIGH_PRIORITY=$(grep "^!" "$CLEAN_RUNNER" | sed 's/^!//' | sed -E 's/(.*)[○◎]/\1[○◎]/' | paste -sd "|" -)
+HIGH_PRIORITY=$(grep "^!" "$CLEAN_SKILL" | sed 's/^!//' | sed -E 's/(.*)[○◎]/\1[○◎]/' | paste -sd "|" -)
 
 # กลุ่มที่ 2: ทั่วไป (ไม่มี ! นำหน้า) -> แปลง ○◎ เป็น [○◎]
-NORMAL_PRIORITY=$(grep -v "^!" "$CLEAN_RUNNER" | grep -vE "^#|^$" | sed -E 's/(.*)[○◎]/\1[○◎]/' | paste -sd "|" -)
+NORMAL_PRIORITY=$(grep -v "^!" "$CLEAN_SKILL" | grep -vE "^#|^$" | sed -E 's/(.*)[○◎]/\1[○◎]/' | paste -sd "|" -)
 
 # 5. Process Category 47 (Skills - Direct ID)
 echo "📦 Building category 47 with Smart Colors..."
@@ -92,7 +92,7 @@ echo "" >> "$LOG_FILE"
 jq -r 'to_entries[] | .value' "$TEMP_DIR/47.json" "$TEMP_DIR/147.json" 2>/dev/null | sed -E 's/<[^>]*>//g' > "$TEMP_DIR/all_found.txt"
 
 echo "=== Items in skill.txt NOT FOUND in game data ===" >> "$LOG_FILE"
-cat "$CLEAN_RUNNER" | grep -vE "^#|^$" | sed 's/^!//' | while read -r item; do
+cat "$CLEAN_SKILL" | grep -vE "^#|^$" | sed 's/^!//' | while read -r item; do
     item_regex=$(echo "$item" | sed -E 's/(.*)[○◎]/\1[○◎]/')
     if ! grep -qE "${item_regex}" "$TEMP_DIR/all_found.txt"; then
         echo "- $item" >> "$LOG_FILE"
