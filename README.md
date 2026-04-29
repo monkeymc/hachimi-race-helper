@@ -44,4 +44,4 @@
    ./build_dict.sh
    ```
 2. ระบบจะสร้างไฟล์ `text_data_dict.json` ขึ้นมา
-3. ให้นำไฟล์ `text_data_dict.json` ไปใส่แทนที่ (Replace) ในโฟลเดอร์ `game` ของโปรแกรมที่คุณใช้งาน
+3. ให้นำไฟล์ `text_data_dict.json` ไปใส่แทนที่ (Replace) ในโฟลเดอร์ `..\hachimi\localized_data\` ของโปรแกรมที่คุณใช้งาน
