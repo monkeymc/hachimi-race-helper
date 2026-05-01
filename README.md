@@ -17,10 +17,11 @@ To help you understand when a skill will activate during a race, English prefixe
 
 ## 🎨 Skill Color Classification (Colors)
 
-To help prioritize skills for each racehorse, skills are divided into 2 priority levels using color codes:
+To help prioritize skills and identify key effects, the following color codes are used:
 
 - **High Priority - Pink/Red (`#ff0066`):** Essential skills that are highly recommended for your build.
 - **Normal Priority - Blue (`#0055ff`):** Secondary or standard skills that you plan to use.
+- **Effect Highlighting - Green (`#388E3C`):** Automatically highlights **"Current Speed"** text within skill descriptions to make powerful effects stand out.
 
 ### ⚙️ How to Define Colors
 You can manage your custom list and categorize skills in the `skill.txt` file:
