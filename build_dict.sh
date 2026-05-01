@@ -71,7 +71,7 @@ cat "$FACTOR_JSON" | jq -r --arg high "$HIGH_PRIORITY" --arg normal "$NORMAL_PRI
 
 # 7. Process Category 48 (SD Data)
 echo "📦 Syncing category 48 from SD file..."
-jq -c '.["48"]' "$SD_FILE" > "$TEMP_DIR/48.json"
+jq -c '.["48"] | map_values(gsub("(?i)current speed"; "<color=#388E3C>Current Speed</color>"))' "$SD_FILE" > "$TEMP_DIR/48.json"
 
 # 8. Final Assembly (Replace Mode)
 echo "🛠️ Final Assembly: Replacing categories 47, 48, 147..."
