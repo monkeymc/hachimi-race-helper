@@ -1,0 +1,493 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "run_full_graphify.py",
+      "file_type": "code",
+      "source_file": "run_full_graphify.py",
+      "source_location": "L1",
+      "id": "run_full_graphify_py",
+      "community": 5,
+      "norm_label": "run_full_graphify.py"
+    },
+    {
+      "label": "gen_index.py",
+      "file_type": "code",
+      "source_file": "hachimi-tl-en/gen_index.py",
+      "source_location": "L1",
+      "id": "hachimi_tl_en_gen_index_py",
+      "community": 2,
+      "norm_label": "gen_index.py"
+    },
+    {
+      "label": "ls_tree()",
+      "file_type": "code",
+      "source_file": "hachimi-tl-en/gen_index.py",
+      "source_location": "L6",
+      "id": "hachimi_tl_en_gen_index_ls_tree",
+      "community": 2,
+      "norm_label": "ls_tree()"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "hachimi-tl-en/gen_index.py",
+      "source_location": "L16",
+      "id": "hachimi_tl_en_gen_index_main",
+      "community": 2,
+      "norm_label": "main()"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "id": "readme_md",
+      "community": 1,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "Hachimi Race Helper (\u30a6\u30de\u5a18 Skill Visualizer)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "id": "hachimi_race_helper_readme_hachimi_race_helper_skill_visualizer",
+      "community": 1,
+      "norm_label": "hachimi race helper (\u30a6\u30de\u5a18 skill visualizer)"
+    },
+    {
+      "label": "\ud83d\udcf8 Demo Screenshots",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L5",
+      "id": "hachimi_race_helper_readme_demo_screenshots",
+      "community": 1,
+      "norm_label": "\ud83d\udcf8 demo screenshots"
+    },
+    {
+      "label": "\ud83c\udff7\ufe0f Prefixes (Skill Activation Timing)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L10",
+      "id": "hachimi_race_helper_readme_prefixes_skill_activation_timing",
+      "community": 1,
+      "norm_label": "\ud83c\udff7\ufe0f prefixes (skill activation timing)"
+    },
+    {
+      "label": "\ud83c\udfa8 Skill Color Classification (Colors)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L18",
+      "id": "hachimi_race_helper_readme_skill_color_classification_colors",
+      "community": 1,
+      "norm_label": "\ud83c\udfa8 skill color classification (colors)"
+    },
+    {
+      "label": "\u2699\ufe0f How to Define Colors",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L28",
+      "id": "hachimi_race_helper_readme_how_to_define_colors",
+      "community": 1,
+      "norm_label": "\u2699\ufe0f how to define colors"
+    },
+    {
+      "label": "\ud83d\udee0\ufe0f Installation",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L33",
+      "id": "hachimi_race_helper_readme_installation",
+      "community": 3,
+      "norm_label": "\ud83d\udee0\ufe0f installation"
+    },
+    {
+      "label": "Dependencies:",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L35",
+      "id": "hachimi_race_helper_readme_dependencies",
+      "community": 3,
+      "norm_label": "dependencies:"
+    },
+    {
+      "label": "Error Checking (`missing_skills.log`)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L40",
+      "id": "hachimi_race_helper_readme_error_checking_missing_skills_log",
+      "community": 3,
+      "norm_label": "error checking (`missing_skills.log`)"
+    },
+    {
+      "label": "\ud83d\ude80 How to Use",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L43",
+      "id": "hachimi_race_helper_readme_how_to_use",
+      "community": 1,
+      "norm_label": "\ud83d\ude80 how to use"
+    },
+    {
+      "label": "code:bash (./build_dict.sh)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L46",
+      "id": "hachimi_race_helper_readme_codeblock_1",
+      "community": 1,
+      "norm_label": "code:bash (./build_dict.sh)"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "hachimi-tl-en/README.md",
+      "source_location": "L1",
+      "id": "hachimi_tl_en_readme_md",
+      "community": 0,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "Umamusume English Translations",
+      "file_type": "document",
+      "source_file": "hachimi-tl-en/README.md",
+      "source_location": "L1",
+      "id": "hachimi_tl_en_readme_umamusume_english_translations",
+      "community": 0,
+      "norm_label": "umamusume english translations"
+    },
+    {
+      "label": "Install / Use",
+      "file_type": "document",
+      "source_file": "hachimi-tl-en/README.md",
+      "source_location": "L11",
+      "id": "hachimi_tl_en_readme_install_use",
+      "community": 0,
+      "norm_label": "install / use"
+    },
+    {
+      "label": "Versions",
+      "file_type": "document",
+      "source_file": "hachimi-tl-en/README.md",
+      "source_location": "L19",
+      "id": "hachimi_tl_en_readme_versions",
+      "community": 0,
+      "norm_label": "versions"
+    },
+    {
+      "label": "Updating",
+      "file_type": "document",
+      "source_file": "hachimi-tl-en/README.md",
+      "source_location": "L29",
+      "id": "hachimi_tl_en_readme_updating",
+      "community": 0,
+      "norm_label": "updating"
+    },
+    {
+      "label": "Philosophy",
+      "file_type": "document",
+      "source_file": "hachimi-tl-en/README.md",
+      "source_location": "L32",
+      "id": "hachimi_tl_en_readme_philosophy",
+      "community": 0,
+      "norm_label": "philosophy"
+    },
+    {
+      "label": "Translation sources",
+      "file_type": "document",
+      "source_file": "hachimi-tl-en/README.md",
+      "source_location": "L36",
+      "id": "hachimi_tl_en_readme_translation_sources",
+      "community": 0,
+      "norm_label": "translation sources"
+    },
+    {
+      "label": "Contributing translations",
+      "file_type": "document",
+      "source_file": "hachimi-tl-en/README.md",
+      "source_location": "L43",
+      "id": "hachimi_tl_en_readme_contributing_translations",
+      "community": 0,
+      "norm_label": "contributing translations"
+    },
+    {
+      "label": "Data usage",
+      "file_type": "document",
+      "source_file": "hachimi-tl-en/README.md",
+      "source_location": "L53",
+      "id": "hachimi_tl_en_readme_data_usage",
+      "community": 0,
+      "norm_label": "data usage"
+    },
+    {
+      "label": "readme.md",
+      "file_type": "document",
+      "source_file": "hachimi-sd/readme.md",
+      "source_location": "L1",
+      "id": "hachimi_sd_readme_md",
+      "community": 4,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "Skill data descriptions",
+      "file_type": "document",
+      "source_file": "hachimi-sd/readme.md",
+      "source_location": "L1",
+      "id": "hachimi_sd_readme_skill_data_descriptions",
+      "community": 4,
+      "norm_label": "skill data descriptions"
+    },
+    {
+      "label": "Install / Use",
+      "file_type": "document",
+      "source_file": "hachimi-sd/readme.md",
+      "source_location": "L5",
+      "id": "hachimi_sd_readme_install_use",
+      "community": 4,
+      "norm_label": "install / use"
+    },
+    {
+      "label": "run_detect.py",
+      "file_type": "code",
+      "source_file": "run_detect.py",
+      "source_location": "L1",
+      "community": 6,
+      "norm_label": "run_detect.py",
+      "id": "run_detect_py"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "hachimi-tl-en/gen_index.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_tl_en_gen_index_py",
+      "target": "hachimi_tl_en_gen_index_ls_tree"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "hachimi-tl-en/gen_index.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_tl_en_gen_index_py",
+      "target": "hachimi_tl_en_gen_index_main"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "hachimi-tl-en/gen_index.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_tl_en_gen_index_main",
+      "target": "hachimi_tl_en_gen_index_ls_tree"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_md",
+      "target": "hachimi_race_helper_readme_hachimi_race_helper_skill_visualizer"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_race_helper_readme_hachimi_race_helper_skill_visualizer",
+      "target": "hachimi_race_helper_readme_demo_screenshots"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_race_helper_readme_hachimi_race_helper_skill_visualizer",
+      "target": "hachimi_race_helper_readme_prefixes_skill_activation_timing"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_race_helper_readme_hachimi_race_helper_skill_visualizer",
+      "target": "hachimi_race_helper_readme_skill_color_classification_colors"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_race_helper_readme_hachimi_race_helper_skill_visualizer",
+      "target": "hachimi_race_helper_readme_installation"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L41",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_race_helper_readme_hachimi_race_helper_skill_visualizer",
+      "target": "hachimi_race_helper_readme_how_to_use"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_race_helper_readme_skill_color_classification_colors",
+      "target": "hachimi_race_helper_readme_how_to_define_colors"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L33",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_race_helper_readme_installation",
+      "target": "hachimi_race_helper_readme_dependencies"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L38",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_race_helper_readme_installation",
+      "target": "hachimi_race_helper_readme_error_checking_missing_skills_log"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L44",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_race_helper_readme_how_to_use",
+      "target": "hachimi_race_helper_readme_codeblock_1"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "hachimi-tl-en/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_tl_en_readme_md",
+      "target": "hachimi_tl_en_readme_umamusume_english_translations"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "hachimi-tl-en/README.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_tl_en_readme_md",
+      "target": "hachimi_tl_en_readme_install_use"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "hachimi-tl-en/README.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_tl_en_readme_md",
+      "target": "hachimi_tl_en_readme_versions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "hachimi-tl-en/README.md",
+      "source_location": "L29",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_tl_en_readme_md",
+      "target": "hachimi_tl_en_readme_updating"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "hachimi-tl-en/README.md",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_tl_en_readme_md",
+      "target": "hachimi_tl_en_readme_philosophy"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "hachimi-tl-en/README.md",
+      "source_location": "L36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_tl_en_readme_md",
+      "target": "hachimi_tl_en_readme_translation_sources"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "hachimi-tl-en/README.md",
+      "source_location": "L43",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_tl_en_readme_md",
+      "target": "hachimi_tl_en_readme_contributing_translations"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "hachimi-tl-en/README.md",
+      "source_location": "L53",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_tl_en_readme_md",
+      "target": "hachimi_tl_en_readme_data_usage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "hachimi-sd/readme.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_sd_readme_md",
+      "target": "hachimi_sd_readme_skill_data_descriptions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "hachimi-sd/readme.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hachimi_sd_readme_md",
+      "target": "hachimi_sd_readme_install_use"
+    }
+  ],
+  "hyperedges": []
+}
