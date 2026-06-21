@@ -1,0 +1,21 @@
+{
+  "nodes": [
+    {"id": "readme_skill_prioritization", "label": "Skill Prioritization", "file_type": "rationale", "source_file": "/home/chatja/hachimi-race-helper/README.md"},
+    {"id": "readme_timing_prefixes", "label": "Skill Timing Prefixes ([E], [M], [L])", "file_type": "rationale", "source_file": "/home/chatja/hachimi-race-helper/README.md"},
+    {"id": "readme_color_coding", "label": "Skill Color Classification", "file_type": "rationale", "source_file": "/home/chatja/hachimi-race-helper/README.md"},
+    {"id": "tl_en_umamusume_translation", "label": "Umamusume Fan Translation", "file_type": "rationale", "source_file": "/home/chatja/hachimi-race-helper/hachimi-tl-en/README.md"},
+    {"id": "sd_skill_data", "label": "Skill Raw Data Descriptions", "file_type": "rationale", "source_file": "/home/chatja/hachimi-race-helper/hachimi-sd/readme.md"},
+    {"id": "build_script_logic", "label": "Build Dictionary Logic", "file_type": "rationale", "source_file": "/home/chatja/hachimi-race-helper/build_dict.sh"}
+  ],
+  "edges": [
+    {"source": "readme_skill_prioritization", "target": "skill_txt", "relation": "implemented_in", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "/home/chatja/hachimi-race-helper/README.md"},
+    {"source": "build_dict_sh", "target": "build_script_logic", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "/home/chatja/hachimi-race-helper/build_dict.sh"},
+    {"source": "build_script_logic", "target": "sqlite3", "relation": "uses", "confidence": "INFERRED", "confidence_score": 0.95, "source_file": "/home/chatja/hachimi-race-helper/build_dict.sh"},
+    {"source": "build_script_logic", "target": "jq", "relation": "uses", "confidence": "INFERRED", "confidence_score": 0.95, "source_file": "/home/chatja/hachimi-race-helper/build_dict.sh"},
+    {"source": "readme_color_coding", "target": "skill_txt", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "/home/chatja/hachimi-race-helper/README.md"},
+    {"source": "tl_en_umamusume_translation", "target": "hachimi_tl_en", "relation": "documented_in", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "/home/chatja/hachimi-race-helper/hachimi-tl-en/README.md"}
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0
+}
