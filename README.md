@@ -21,6 +21,7 @@ To help prioritize skills and identify key effects, the following color codes ar
 
 - **High Priority - Pink/Red (`#ff0066`):** Essential skills that are highly recommended for your build.
 - **Normal Priority - Blue (`#0055ff`):** Secondary or standard skills that you plan to use.
+- **Situational - Orange (`#ff8800`):** Skills worth taking depending on the race or your position.
 - **Effect Highlighting (Green):** Automatically highlights **"Current Speed"** text within skill descriptions:
     - **`#8E24AA` (Bright Purple):** Used for **Distance** triggers. (Bold tags are removed for readability).
     - **`#1B5E20` (Dark Green):** Used for **any other** cases (e.g., duration-based).
@@ -29,6 +30,7 @@ To help prioritize skills and identify key effects, the following color codes ar
 You can manage your custom list and categorize skills in the `skill.txt` file:
 - To set a skill as **Blue (Normal Priority)**, simply type the skill name, e.g., `右回り`
 - To set a skill as **Pink/Red (High Priority)**, add an exclamation mark `!` in front of the name, e.g., `!しゃかりき`
+- To set a skill as **Orange (Situational)**, add an asterisk `*` in front of the name, e.g., `*危険回避`
 
 ## 🛠️ Installation
 

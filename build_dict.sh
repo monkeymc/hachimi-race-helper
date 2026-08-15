@@ -18,7 +18,7 @@ if [[ ! -f "$MASTER_FILE" || ! -f "$SKILL_LIST" || ! -f "$SD_FILE" || ! -f "$MAS
     exit 1
 fi
 
-echo "🚀 Starting Hachimi-Edge Localization Pipeline (Dual-Color Edition)..."
+echo "🚀 Starting Hachimi-Edge Localization Pipeline (Tri-Color Edition)..."
 
 # 3. Handle Temporary Files & Extract JSON from SQLite
 TEMP_DIR=$(mktemp -d)
@@ -35,12 +35,14 @@ CLEAN_SKILL="$TEMP_DIR/clean_skill.txt"
 tr -d '\r' < "$SKILL_LIST" > "$CLEAN_SKILL"
 
 jq -R -n '
-  [inputs | select(length > 0 and startswith("#") == false) | 
+  [inputs | select(length > 0 and startswith("#") == false) |
    . as $raw |
-   (if startswith("!") then true else false end) as $is_high |
-   ($raw | sub("^!"; "")) as $clean |
+   (if startswith("!") then "#ff0066"
+    elif startswith("*") then "#ff8800"
+    else "#0055ff" end) as $color |
+   ($raw | sub("^[!*]"; "")) as $clean |
    ($clean | sub("(?<prefix>.*)[○◎]"; "\(.prefix)[○◎]")) as $regex |
-   { regex: $regex, is_high: $is_high, name: $clean }
+   { regex: $regex, color: $color, name: $clean }
   ] | to_entries | map(.value + {index: (.key + 1)})
 ' "$CLEAN_SKILL" > "$TEMP_DIR/mappings.json"
 
@@ -57,11 +59,7 @@ cat "$SKILL_JSON" | jq -r --slurpfile mappings "$TEMP_DIR/mappings.json" '
       ($mappings[0] | map(select(. as $m | $name | test($m.regex))) | first) as $match |
       if ($match) then
         (($match.index | tostring) + " " + $prefix + .Name) as $final_name |
-        if ($match.is_high) then
-          { (.index | tostring): ("<color=#ff0066>" + $final_name + "</color>") }
-        else
-          { (.index | tostring): ("<color=#0055ff>" + $final_name + "</color>") }
-        end
+        { (.index | tostring): ("<color=" + $match.color + ">" + $final_name + "</color>") }
       else empty end
     ] | add' > "$TEMP_DIR/47.json"
 
@@ -73,11 +71,7 @@ cat "$FACTOR_JSON" | jq -r --slurpfile mappings "$TEMP_DIR/mappings.json" '
       ($mappings[0] | map(select(. as $m | $n | test($m.regex))) | first) as $match |
       if ($match) then
         (($match.index | tostring) + " " + $n) as $final_name |
-        if ($match.is_high) then
-          { (.index | tostring): ("<color=#ff0066>" + $final_name + "</color>") }
-        else
-          { (.index | tostring): ("<color=#0055ff>" + $final_name + "</color>") }
-        end
+        { (.index | tostring): ("<color=" + $match.color + ">" + $final_name + "</color>") }
       else empty end
     ] | add' > "$TEMP_DIR/147.json"
 
@@ -115,7 +109,7 @@ echo "" >> "$LOG_FILE"
 jq -r 'to_entries[] | .value' "$TEMP_DIR/47.json" "$TEMP_DIR/147.json" 2>/dev/null | sed -E 's/<[^>]*>//g' > "$TEMP_DIR/all_found.txt"
 
 echo "=== Items in skill.txt NOT FOUND in game data ===" >> "$LOG_FILE"
-cat "$CLEAN_SKILL" | grep -vE "^#|^$" | sed 's/^!//' | while read -r item; do
+cat "$CLEAN_SKILL" | grep -vE "^#|^$" | sed -E 's/^[!*]//' | while read -r item; do
     item_regex=$(echo "$item" | sed -E 's/(.*)[○◎]/\1[○◎]/')
     if ! grep -qE "${item_regex}" "$TEMP_DIR/all_found.txt"; then
         echo "- $item" >> "$LOG_FILE"
