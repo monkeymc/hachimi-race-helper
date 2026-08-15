@@ -29,43 +29,55 @@ echo "🔓 Extracting data from master.mdb..."
 sqlite3 -json "$MASTER_MDB" "SELECT [index], text AS Name FROM text_data WHERE category = 147;" > "$FACTOR_JSON"
 sqlite3 -json "$MASTER_MDB" 'SELECT s.id AS "index", n.text AS Name, s.precondition_1, s.condition_1, s.precondition_2, s.condition_2 FROM skill_data s JOIN text_data n ON s.id = n."index" AND n.category = 47;' > "$SKILL_JSON"
 
-# 4. Smart Regex Generation (แยก 2 กลุ่ม)
-echo "🔍 Extracting priorities from skill.txt..."
+# 4. Create Skill Mappings (แยก 2 กลุ่ม & กำหนดเลขลำดับ)
+echo "🔍 Extracting mappings from skill.txt..."
 CLEAN_SKILL="$TEMP_DIR/clean_skill.txt"
 tr -d '\r' < "$SKILL_LIST" > "$CLEAN_SKILL"
 
-# กลุ่มที่ 1: สำคัญมาก (มี ! นำหน้า) -> แปลง ○◎ เป็น [○◎]
-HIGH_PRIORITY=$(grep "^!" "$CLEAN_SKILL" | sed 's/^!//' | sed -E 's/(.*)[○◎]/\1[○◎]/' | paste -sd "|" -)
-
-# กลุ่มที่ 2: ทั่วไป (ไม่มี ! นำหน้า) -> แปลง ○◎ เป็น [○◎]
-NORMAL_PRIORITY=$(grep -v "^!" "$CLEAN_SKILL" | grep -vE "^#|^$" | sed -E 's/(.*)[○◎]/\1[○◎]/' | paste -sd "|" -)
+jq -R -n '
+  [inputs | select(length > 0 and startswith("#") == false) | 
+   . as $raw |
+   (if startswith("!") then true else false end) as $is_high |
+   ($raw | sub("^!"; "")) as $clean |
+   ($clean | sub("(?<prefix>.*)[○◎]"; "\(.prefix)[○◎]")) as $regex |
+   { regex: $regex, is_high: $is_high, name: $clean }
+  ] | to_entries | map(.value + {index: (.key + 1)})
+' "$CLEAN_SKILL" > "$TEMP_DIR/mappings.json"
 
 # 5. Process Category 47 (Skills - Direct ID)
-echo "📦 Building category 47 with Smart Colors..."
-cat "$SKILL_JSON" | jq -r --arg high "$HIGH_PRIORITY" --arg normal "$NORMAL_PRIORITY" '
+echo "📦 Building category 47 with Smart Colors & Numbers..."
+cat "$SKILL_JSON" | jq -r --slurpfile mappings "$TEMP_DIR/mappings.json" '
     [ .[] | 
       ((.precondition_1 // "") + "|" + (.condition_1 // "") + "|" + (.precondition_2 // "") + "|" + (.condition_2 // "")) as $c |
       (if ($c | test("phase.*==[23]|phase>=2|is_lastspurt==1|is_finalcorner")) then "[L] "
        elif ($c | test("phase.*==1|distance_rate>=50|later_half")) then "[M] "
        elif ($c | test("phase.*==0")) then "[E] "
        else "" end) as $prefix |
-      ($prefix + .Name) as $final_name |
-      if ($high != "" and (.Name | test($high))) then
-        { (.index | tostring): ("<color=#ff0066>" + $final_name + "</color>") }
-      elif ($normal != "" and (.Name | test($normal))) then
-        { (.index | tostring): ("<color=#0055ff>" + $final_name + "</color>") }
+      .Name as $name |
+      ($mappings[0] | map(select(. as $m | $name | test($m.regex))) | first) as $match |
+      if ($match) then
+        (($match.index | tostring) + " " + $prefix + .Name) as $final_name |
+        if ($match.is_high) then
+          { (.index | tostring): ("<color=#ff0066>" + $final_name + "</color>") }
+        else
+          { (.index | tostring): ("<color=#0055ff>" + $final_name + "</color>") }
+        end
       else empty end
     ] | add' > "$TEMP_DIR/47.json"
 
 # 6. Process Category 147 (Factors - Cleaned & Smart Colors)
-echo "📦 Building category 147 with Smart Colors..."
-cat "$FACTOR_JSON" | jq -r --arg high "$HIGH_PRIORITY" --arg normal "$NORMAL_PRIORITY" '
+echo "📦 Building category 147 with Smart Colors & Numbers..."
+cat "$FACTOR_JSON" | jq -r --slurpfile mappings "$TEMP_DIR/mappings.json" '
     [ .[] | 
       (.Name | gsub("[★☆]"; "")) as $n |
-      if ($high != "" and ($n | test($high))) then
-        { (.index | tostring): ("<color=#ff0066>" + $n + "</color>") }
-      elif ($normal != "" and ($n | test($normal))) then
-        { (.index | tostring): ("<color=#0055ff>" + $n + "</color>") }
+      ($mappings[0] | map(select(. as $m | $n | test($m.regex))) | first) as $match |
+      if ($match) then
+        (($match.index | tostring) + " " + $n) as $final_name |
+        if ($match.is_high) then
+          { (.index | tostring): ("<color=#ff0066>" + $final_name + "</color>") }
+        else
+          { (.index | tostring): ("<color=#0055ff>" + $final_name + "</color>") }
+        end
       else empty end
     ] | add' > "$TEMP_DIR/147.json"
 
@@ -111,9 +123,8 @@ cat "$CLEAN_SKILL" | grep -vE "^#|^$" | sed 's/^!//' | while read -r item; do
 done
 
 echo "" >> "$LOG_FILE"
-echo "=== Raw Regex Patterns Used ===" >> "$LOG_FILE"
-echo "HIGH_PRIORITY: $HIGH_PRIORITY" >> "$LOG_FILE"
-echo "NORMAL_PRIORITY: $NORMAL_PRIORITY" >> "$LOG_FILE"
+echo "=== Number of skills loaded from skill.txt ===" >> "$LOG_FILE"
+echo "Total skills mapped: $(jq 'length' "$TEMP_DIR/mappings.json")" >> "$LOG_FILE"
 
 # 10. Cleanup
 rm -rf "$TEMP_DIR"
