@@ -52,12 +52,28 @@ After building the dictionary, if any skill listed in `skill.txt` contains a typ
 3. Take the generated `text_data_dict.json` file and replace the original one located in the path: `..\hachimi\localized_data\` within your client folder.
 4. **Restart the game.** Hachimi reads `localized_data/` once at startup, so a running client keeps serving the dictionary it loaded when it launched — swapping the file under it changes nothing until the process restarts. If the colors don't appear, this is the first thing to check.
 
-### Keeping `master.mdb` fresh
+### About `master.mdb`
 
-The game adds skills roughly monthly, and this repo's `master.mdb` is only a snapshot. A skill name that lands in `missing_skills.log` is far more often a stale snapshot than a typo. Refresh it from your own install before assuming the name is wrong:
+`master.mdb` is **not tracked in this repo**. It is ~45MB and the game rewrites it every patch, so every bump used to add another 45MB to git history — around 250MB of it before the file was removed from history entirely.
+
+Instead, `build_dict.sh` copies it from your own game install the first time you run it. The default source is:
+
+```
+/mnt/g/SteamLibrary/steamapps/common/UmamusumePrettyDerby_Jpn/UmamusumePrettyDerby_Jpn_Data/Persistent/master/master.mdb
+```
+
+If your install lives elsewhere, point `MASTER_MDB_SRC` at it:
 
 ```bash
-cp "<game folder>/UmamusumePrettyDerby_Jpn_Data/Persistent/master/master.mdb" ./master.mdb
-git submodule update --remote
+MASTER_MDB_SRC='/path/to/UmamusumePrettyDerby_Jpn_Data/Persistent/master/master.mdb' ./build_dict.sh
+```
+
+The game adds skills roughly monthly, so when your install has a newer copy than the local one the script says so and tells you how to refresh it. A skill name that turns up in `missing_skills.log` is far more often a stale `master.mdb` than a typo — refresh before assuming the name is wrong.
+
+### First-time setup
+
+```bash
+git submodule update --init --recursive
+./build_dict.sh
 ```
 

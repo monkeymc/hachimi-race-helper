@@ -4,6 +4,10 @@
 MASTER_FILE="hachimi-tl-en/localized_data/text_data_dict.json"
 SKILL_LIST="skill.txt"
 MASTER_MDB="master.mdb"
+# master.mdb is not tracked in git: it is ~45MB and the game rewrites it every patch,
+# so keeping it in history cost more than the file is worth. Point this at your own
+# install if it does not live on the G: drive.
+MASTER_MDB_SRC="${MASTER_MDB_SRC:-/mnt/g/SteamLibrary/steamapps/common/UmamusumePrettyDerby_Jpn/UmamusumePrettyDerby_Jpn_Data/Persistent/master/master.mdb}"
 SD_FILE="hachimi-sd/localized_data/text_data_dict.json"
 OUTPUT_FILE="text_data_dict.json"
 
@@ -13,8 +17,29 @@ if ! command -v sqlite3 &> /dev/null; then
     exit 1
 fi
 
-if [[ ! -f "$MASTER_FILE" || ! -f "$SKILL_LIST" || ! -f "$SD_FILE" || ! -f "$MASTER_MDB" ]]; then
+# Fetch master.mdb from the game install when it is not here yet (fresh clone).
+if [[ ! -f "$MASTER_MDB" ]]; then
+    if [[ -f "$MASTER_MDB_SRC" ]]; then
+        echo "📥 master.mdb not found — copying from game install..."
+        cp "$MASTER_MDB_SRC" "$MASTER_MDB" || exit 1
+    else
+        echo "❌ Error: master.mdb not found, and no game install at:"
+        echo "     $MASTER_MDB_SRC"
+        echo "   Point MASTER_MDB_SRC at your own install and retry, e.g."
+        echo "     MASTER_MDB_SRC='/path/to/UmamusumePrettyDerby_Jpn_Data/Persistent/master/master.mdb' ./build_dict.sh"
+        exit 1
+    fi
+elif [[ -f "$MASTER_MDB_SRC" && "$MASTER_MDB_SRC" -nt "$MASTER_MDB" ]]; then
+    # The game adds skills roughly monthly. A stale copy makes brand-new skill names
+    # look like typos in missing_skills.log, so say something rather than fail quietly.
+    echo "⚠️  Your game install has a newer master.mdb than the local copy."
+    echo "   Run this to pick up newly added skills:"
+    echo "     cp \"$MASTER_MDB_SRC\" $MASTER_MDB"
+fi
+
+if [[ ! -f "$MASTER_FILE" || ! -f "$SKILL_LIST" || ! -f "$SD_FILE" ]]; then
     echo "❌ Error: Missing required files."
+    echo "   Did you run: git submodule update --init --recursive ?"
     exit 1
 fi
 
