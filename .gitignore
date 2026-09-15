@@ -1,4 +1,9 @@
 *.log
+*.bak
 tmp/
 .DS_Store
 text_data_dict.json
+backups/
+skill.png
+test_mappings.json
+test_skill_data.json

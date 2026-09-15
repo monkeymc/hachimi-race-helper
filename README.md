@@ -50,3 +50,14 @@ After building the dictionary, if any skill listed in `skill.txt` contains a typ
    ```
 2. The script will generate a `text_data_dict.json` file.
 3. Take the generated `text_data_dict.json` file and replace the original one located in the path: `..\hachimi\localized_data\` within your client folder.
+4. **Restart the game.** Hachimi reads `localized_data/` once at startup, so a running client keeps serving the dictionary it loaded when it launched — swapping the file under it changes nothing until the process restarts. If the colors don't appear, this is the first thing to check.
+
+### Keeping `master.mdb` fresh
+
+The game adds skills roughly monthly, and this repo's `master.mdb` is only a snapshot. A skill name that lands in `missing_skills.log` is far more often a stale snapshot than a typo. Refresh it from your own install before assuming the name is wrong:
+
+```bash
+cp "<game folder>/UmamusumePrettyDerby_Jpn_Data/Persistent/master/master.mdb" ./master.mdb
+git submodule update --remote
+```
+
