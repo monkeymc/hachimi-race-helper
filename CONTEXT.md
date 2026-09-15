@@ -60,10 +60,11 @@ _Avoid_: timing tag, activation marker
 ### Sources
 
 **Game database**:
-`master.mdb`, the authoritative source of Skill and Factor names. The copy in this repo is a
-snapshot and goes stale as the game patches; it is refreshed from the player's own install at
-`UmamusumePrettyDerby_Jpn_Data/Persistent/master/master.mdb`. A Watchlist entry that lands in
-`missing_skills.log` usually means the snapshot is old, not that the name is wrong.
+`master.mdb`, the authoritative source of Skill and Factor names. It belongs to the player's
+game install, not to this repo — it is never committed, and the build copies it in from
+`UmamusumePrettyDerby_Jpn_Data/Persistent/master/master.mdb` on demand. The local copy goes
+stale as the game patches, so a Watchlist entry that lands in `missing_skills.log` usually
+means the copy is old, not that the name is wrong.
 _Avoid_: mdb, master db
 
 **Replace Mode**:
